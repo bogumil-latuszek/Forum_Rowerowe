@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ForumRowerowe.Models.Post>
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+<h1>Wszystkie Posty</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>                   
+                     @item.PostID > @item.Content
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PostID">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PostID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
