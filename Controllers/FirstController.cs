@@ -30,5 +30,20 @@ namespace ForumRowerowe.Controllers
         {
             return View();
         }
+        // POST: Jokes/Create
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("PostID,Content")] Models.Post post)
+        {
+            if (ModelState.IsValid)
+            {
+                counter++;
+                post.PostID = counter;
+                ListOfPosts.Add(post);
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+            //return View("ShowAllPosts");
+        }
+
     }
 }
