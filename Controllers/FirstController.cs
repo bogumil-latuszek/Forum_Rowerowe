@@ -62,5 +62,32 @@ namespace ForumRowerowe.Controllers
             return NotFound();
         }
 
+        // POST: Jokes/Delete/5
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            int? removedPostID = null;
+            foreach (var post in ListOfPosts)
+            {
+                if (post.PostID == id)
+                {
+                    removedPostID = post.PostID;
+                    ListOfPosts.Remove(post);
+                    break; //dodać zabezpieczenie na wypadek gdyby 2 lub więcej postów miało to samo postID
+                }
+                
+            }
+            if (removedPostID == null) { return RedirectToAction(nameof(Index)); }
+            foreach (var post in ListOfPosts)
+            {
+                if (post.PostID >= removedPostID && post.PostID >= 1)
+                {
+                    post.PostID -= 1;
+                }
+
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
