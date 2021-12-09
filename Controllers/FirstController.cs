@@ -62,7 +62,7 @@ namespace ForumRowerowe.Controllers
             return NotFound();
         }
 
-        // POST: Jokes/Delete/5
+        // POST: Post/Delete/5
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -87,6 +87,23 @@ namespace ForumRowerowe.Controllers
 
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Post/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            foreach (var post in ListOfPosts)
+            {
+                if (post.PostID == id)
+                {
+                    return View(id);
+                }
+            }
+            return NotFound();
         }
 
     }
