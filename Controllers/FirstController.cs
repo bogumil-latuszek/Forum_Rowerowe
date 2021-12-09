@@ -100,7 +100,7 @@ namespace ForumRowerowe.Controllers
             {
                 if (post.PostID == id)
                 {
-                    return View(id);
+                    return View();
                 }
             }
             return NotFound();
