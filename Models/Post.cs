@@ -12,6 +12,7 @@ namespace ForumRowerowe.Models
         [MinLength(length: 1, ErrorMessage = "Twoja wiadomość jest za krótka")]
         public string Content { get; set; }
 
+        [HiddenInput]
         public int ThreadID { get; set; }
     }
 }
