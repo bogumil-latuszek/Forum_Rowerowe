@@ -13,11 +13,11 @@ namespace ForumRowerowe.Controllers
         new List<ForumRowerowe.Models.Post>()
         {
             new Models.Post(){
-            PostID=1,ThreadID=1,Content= "cześć właśnie kupiłem rower" },
+            PostID=1,Content= "cześć właśnie kupiłem rower" },
             new Models.Post(){
-            PostID=2,ThreadID=1,Content= "jaki?" },
+            PostID=2,Content= "jaki?" },
             new Models.Post(){
-            PostID=2,ThreadID=1,Content= "Scott górski z 2015 mało używany, " +
+            PostID=2,Content= "Scott górski z 2015 mało używany, " +
                 "całkiem tanio idzie znaleść podobne na wyprzedażach tutaj w Lublinie" }
         };
         public IActionResult Index()
