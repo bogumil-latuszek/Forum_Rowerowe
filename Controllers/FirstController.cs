@@ -30,7 +30,7 @@ namespace ForumRowerowe.Controllers
         {
             return View();
         }
-        // POST: Jokes/Create
+        // POST: Post/Create
         [HttpPost]
         public async Task<IActionResult> Create([Bind("PostID,Content")] Models.Post post)
         {
@@ -43,6 +43,23 @@ namespace ForumRowerowe.Controllers
             }
             return RedirectToAction(nameof(Index));
             //return View("ShowAllPosts");
+        }
+
+        // GET: Post/Delete
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            foreach (var post in ListOfPosts)
+            {
+                if (post.PostID == id)
+                {
+                    return View();
+                }
+            }
+            return NotFound();
         }
 
     }
