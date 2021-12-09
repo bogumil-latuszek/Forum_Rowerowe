@@ -17,7 +17,7 @@ namespace ForumRowerowe.Controllers
             new Models.Post(){
             PostID=2,Content= "jaki?" },
             new Models.Post(){
-            PostID=2,Content= "Scott górski z 2015 mało używany, " +
+            PostID=3,Content= "Scott górski z 2015 mało używany, " +
                 "całkiem tanio idzie znaleść podobne na wyprzedażach tutaj w Lublinie" }
         };
         public IActionResult Index()
@@ -73,6 +73,10 @@ namespace ForumRowerowe.Controllers
                 {
                     removedPostID = post.PostID;
                     ListOfPosts.Remove(post);
+                    if (counter>0)
+                    {
+                        counter--;
+                    }
                     break; //dodać zabezpieczenie na wypadek gdyby 2 lub więcej postów miało to samo postID
                 }
                 
@@ -90,20 +94,29 @@ namespace ForumRowerowe.Controllers
         }
 
         // GET: Post/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+             return View(ListOfPosts[id-1]);
+        }
+
+        // POST: Post/Edit/5
+        [HttpPost]
+        public async Task<IActionResult> Edit( [ Bind("PostID,Content")] Models.Post post)
+        {
+
+            if (ModelState.IsValid)
             {
-                return NotFound();
-            }
-            foreach (var post in ListOfPosts)
-            {
-                if (post.PostID == id)
+                for (int i = 0; i < ListOfPosts.Count; i++)
                 {
-                    return View();
+                    if(ListOfPosts[i].PostID == post.PostID)
+                    {
+                        ListOfPosts[i] = post;
+                        break;
+                    }
                 }
+                return RedirectToAction(nameof(Index));
             }
-            return NotFound();
+            return RedirectToAction(nameof(Index));
         }
 
     }
