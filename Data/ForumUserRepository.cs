@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ForumRowerowe.Data
 {
-    public class ForumUserRepository
+    public class ForumUserRepository: IForumUserRepository
     {
         private ApplicationDbContext _context;
         public ForumUserRepository(ApplicationDbContext context)
