@@ -8,11 +8,11 @@ namespace ForumRowerowe.Models
     {
         [HiddenInput]
         public int PostID { get; set; }
+
         [MaxLength(length: 255, ErrorMessage = "Twoja wiadomość jest za długa")]
         [MinLength(length: 1, ErrorMessage = "Twoja wiadomość jest za krótka")]
         [Display(Name ="Twój post")]
         public string Content { get; set; }
-
-
+        public Thread Thread { get; set; } //navigation property
     }
 }
