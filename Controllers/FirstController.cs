@@ -22,7 +22,7 @@ namespace ForumRowerowe.Controllers
         };
         public IActionResult Index()
         {
-            return View("ShowAllPosts", ListOfPosts);
+            return View(ListOfPosts);
         }
 
         // GET: Post/Create
@@ -42,7 +42,6 @@ namespace ForumRowerowe.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(Index));
-            //return View("ShowAllPosts");
         }
 
         // GET: Post/Delete
