@@ -29,6 +29,7 @@ namespace ForumRowerowe.Controllers
          }
         // POST: Post/Create
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("PostID,Content")] Models.Post post)
         {
             if (ModelState.IsValid)
@@ -41,6 +42,7 @@ namespace ForumRowerowe.Controllers
         }
 
         // GET: Post/Delete
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -54,6 +56,7 @@ namespace ForumRowerowe.Controllers
 
         // POST: Post/Delete/5
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (ModelState.IsValid)
@@ -64,6 +67,7 @@ namespace ForumRowerowe.Controllers
         }
 
         // GET: Post/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             var post = repository.FindPost(id);
@@ -72,6 +76,7 @@ namespace ForumRowerowe.Controllers
 
         // POST: Post/Edit/5
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Edit( [ Bind("PostID,Content")] Models.Post post)
         {
             if (ModelState.IsValid)
