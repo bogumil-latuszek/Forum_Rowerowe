@@ -6,6 +6,7 @@ namespace ForumRowerowe.Models
 {
     public class Post
     {
+        public string authorID;
         [HiddenInput]
         public int PostID { get; set; }
 

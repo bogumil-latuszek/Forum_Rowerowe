@@ -9,6 +9,7 @@ namespace ForumRowerowe.Models
 {
     public class Thread
     {
+        public string authorID;
         [HiddenInput]
         public int ThreadID { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using ForumRowerowe.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace ForumRowerowe.Controllers
             return View(allPosts);
         }
 
+        [Authorize]
         // GET: Post/Create
         public IActionResult Create()
         {
@@ -31,6 +33,8 @@ namespace ForumRowerowe.Controllers
         {
             if (ModelState.IsValid)
             {
+                var currentUserName = User.Identity.Name;
+                post.authorID = currentUserName;
                 repository.AddPosts(post);
             }
             return RedirectToAction(nameof(Index));
