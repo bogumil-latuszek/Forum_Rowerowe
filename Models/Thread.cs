@@ -9,7 +9,6 @@ namespace ForumRowerowe.Models
 {
     public class Thread
     {
-        public string authorID;
         [HiddenInput]
         public int ThreadID { get; set; }
 
@@ -17,6 +16,7 @@ namespace ForumRowerowe.Models
         [MinLength(length: 2, ErrorMessage = "za krótki tytuł")]
         [Display(Name = "Tytuł wątku")]
         public string Title { get; set; }
+        public string authorID { get; set; }
         public ICollection<Post> Posts { get; set; } //navigation property
         public Thread()
         {

@@ -5,8 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ForumRowerowe.Models
 {
     public class Post
-    {
-        public string authorID;
+    {      
         [HiddenInput]
         public int PostID { get; set; }
 
@@ -14,6 +13,7 @@ namespace ForumRowerowe.Models
         [MinLength(length: 1, ErrorMessage = "Twoja wiadomość jest za krótka")]
         [Display(Name ="Twój post")]
         public string Content { get; set; }
+        public string authorID { get; set; }
         public Thread Thread { get; set; } //navigation property
     }
 }
