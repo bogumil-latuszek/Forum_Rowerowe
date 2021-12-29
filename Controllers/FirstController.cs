@@ -51,7 +51,12 @@ namespace ForumRowerowe.Controllers
             }
             int Id = id.GetValueOrDefault();
             var post = repository.FindPost(Id);
-            return View(post);
+            var currentUserName = User.Identity.Name;
+            if (post.authorID == currentUserName)
+            {
+                return View(post);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Post/Delete/5
@@ -71,7 +76,12 @@ namespace ForumRowerowe.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var post = repository.FindPost(id);
-            return View(post);
+            var currentUserName = User.Identity.Name;
+            if (post.authorID == currentUserName)
+            {
+                return View(post);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Post/Edit/5
