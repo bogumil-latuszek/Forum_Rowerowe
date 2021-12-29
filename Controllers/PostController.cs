@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace ForumRowerowe.Controllers
 {
-    public class FirstController : Controller
+    public class PostController : Controller
     {
         private IForumCrudRepository repository;
-        public FirstController(IForumCrudRepository repository)
+        public PostController(IForumCrudRepository repository)
         {
             this.repository = repository;
         }        
