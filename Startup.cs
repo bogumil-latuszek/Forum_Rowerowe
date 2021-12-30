@@ -36,6 +36,7 @@ namespace ForumRowerowe
             services.AddRazorPages();
             services.AddTransient<IForumCrudRepository, ForumAdminRepository>();
             services.AddTransient<IForumUserRepository, ForumUserRepository>();
+            services.AddTransient<IForumThreadCrudRepository, ForumThreadAdminRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
