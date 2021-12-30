@@ -1,4 +1,5 @@
 ﻿using ForumRowerowe.Data;
+using ForumRowerowe.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,12 +16,16 @@ namespace ForumRowerowe.Controllers
         {
             this.repository = repository;
         }        
-        public IActionResult Index()
+        /*public IActionResult Index()
         {
             var allPosts = repository.FindAll();
             return View(allPosts);
+        }*/
+        public IActionResult Index(int threadID)
+        {
+            var lp = repository.FindPosts(threadID);
+            return View(lp);
         }
-
         [Authorize]
         // GET: Post/Create
         public IActionResult Create()

@@ -41,5 +41,9 @@ namespace ForumRowerowe.Data
         {
             return (from p in _context.Posts select p).OrderBy(p => p.PostID).Skip((page - 1) * size).Take(size).ToList();
         }
+        public IList<Post> FindPosts(int threadID)
+        {
+            return (from p in _context.Posts select p).Where(p => p.Thread.ThreadID == threadID).OrderBy(p => p.PostID).ToList();
+        }
     }
 }

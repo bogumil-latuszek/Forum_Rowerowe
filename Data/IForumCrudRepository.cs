@@ -14,5 +14,6 @@ namespace ForumRowerowe.Data
         void UpdatePosts(Post post);
         IList<Post> FindAll();
         IList<Post> FindPage(int page, int size);
+        IList<Post> FindPosts(int threadID);
     }
 }
