@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<ForumRowerowe.Models.Thread>
+
+@{
+    ViewData["Title"] = "Index";
+    string loggedInUser = @UserManager.GetUserName(User);
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThreadID)
+                </td>
+                <td>
+                    <a  class="nav-link text-dark" asp-area="" asp-controller="Post" asp-action="Index" asp-route-threadID="@item.ThreadID">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.authorID)
+                </td>
+                @if (loggedInUser == item.authorID)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ThreadID">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ThreadID">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
