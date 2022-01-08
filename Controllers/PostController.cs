@@ -16,11 +16,6 @@ namespace ForumRowerowe.Controllers
         {
             this.repository = repository;
         }        
-        /*public IActionResult Index()
-        {
-            var allPosts = repository.FindAll();
-            return View(allPosts);
-        }*/
         public IActionResult Index(int threadID)
         {
             TempData["ThreadID"] = threadID;
@@ -44,7 +39,7 @@ namespace ForumRowerowe.Controllers
                 post.authorID = currentUserName;
                 repository.AddPosts(post);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID });
         }
 
         // GET: Post/Delete
@@ -62,7 +57,7 @@ namespace ForumRowerowe.Controllers
             {
                 return View(post);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID });
         }
 
         // POST: Post/Delete/5
@@ -74,7 +69,8 @@ namespace ForumRowerowe.Controllers
             {
                 repository.DeletePosts(id);
             }
-            return RedirectToAction(nameof(Index));
+            var post = repository.FindPost(id);
+            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID });
         }
 
         // GET: Post/Edit/5
