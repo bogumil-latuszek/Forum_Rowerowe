@@ -69,12 +69,13 @@ namespace ForumRowerowe.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id, string threadTitle)
         {
+            var post = repository.FindPost(id);
+            var threadID = post.ThreadID;
             if (ModelState.IsValid)
             {
                 repository.DeletePosts(id);
             }
-            var post = repository.FindPost(id);
-            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID, threadTitle = threadTitle });
+            return RedirectToAction(nameof(Index), new { threadID = threadID, threadTitle = threadTitle });
         }
 
         // GET: Post/Edit/5
