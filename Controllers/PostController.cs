@@ -47,7 +47,7 @@ namespace ForumRowerowe.Controllers
 
         // GET: Post/Delete
         [Authorize]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, string threadTitle)
         {
             if (id == null)
             {
@@ -58,22 +58,23 @@ namespace ForumRowerowe.Controllers
             var currentUserName = User.Identity.Name;
             if (post.authorID == currentUserName)
             {
+                TempData["ThreadTitle"] = threadTitle;
                 return View(post);
             }
-            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID });
+            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID, threadTitle = threadTitle });
         }
 
         // POST: Post/Delete/5
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, string threadTitle)
         {
             if (ModelState.IsValid)
             {
                 repository.DeletePosts(id);
             }
             var post = repository.FindPost(id);
-            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID });
+            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID, threadTitle = threadTitle });
         }
 
         // GET: Post/Edit/5

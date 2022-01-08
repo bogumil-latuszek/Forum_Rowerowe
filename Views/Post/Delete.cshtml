@@ -1,32 +1,35 @@
 ﻿@model ForumRowerowe.Models.Post
 
 @{
-    ViewData["Title"] = "Delete";
+    string threadTitle = (string)TempData["ThreadTitle"];
+    ViewData["Title"] = threadTitle;
 }
 
-<h1>Delete</h1>
+<h1>Usuń</h1>
+<h4>Post wątku "@threadTitle"</h4>
 
-<h3>Are you sure you want to delete this?</h3>
+
 <div>
-    <h4>Post</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PostID)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PostID)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Content)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Content)
         </dd>
     </dl>
-    
+
+    <h3>Potwierdzasz usunięcie?</h3>
     <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Tak - usuń" class="btn btn-danger" /> |
+        <a asp-action="Index" asp-route-threadID="@Model.ThreadID" asp-route-threadTitle="@threadTitle">Nie - powrót do wątku "@threadTitle"</a>
+        <input type="hidden" name="threadTitle" value="@threadTitle">
     </form>
 </div>

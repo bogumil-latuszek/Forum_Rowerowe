@@ -11,7 +11,7 @@
 
 <h1>Posty wątku "@threadTitle"</h1>
 <p>
-    <a asp-action="Create" asp-route-threadID="@threadID" asp-route-threadTitle="@threadTitle">Create New</a>
+    <a asp-action="Create" asp-route-threadID="@threadID" asp-route-threadTitle="@threadTitle">Stwórz nowy</a>
 </p>
 <table class="table">
     <tbody>
@@ -24,8 +24,8 @@
                 @if(loggedInUser == item.authorID)
                 {
                     <td>
-                    <a asp-action="Edit" asp-route-id="@item.PostID" asp-route-threadTitle="@threadTitle">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PostID">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.PostID" asp-route-threadTitle="@threadTitle">Zmień</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PostID" asp-route-threadTitle="@threadTitle">Usuń</a>
                     </td>
                 }
                 
