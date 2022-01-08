@@ -14,6 +14,7 @@ namespace ForumRowerowe.Models
         [Display(Name ="Twój post")]
         public string Content { get; set; }
         public string authorID { get; set; }
+        public int ThreadID { get; set; }
         public Thread Thread { get; set; } //navigation property
     }
 }
