@@ -19,8 +19,7 @@
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="ThreadID" class="form-control" />
-                <span asp-validation-for="ThreadID" class="text-danger"></span>
+                <input asp-for="ThreadID" class="form-control" value="@threadID" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
