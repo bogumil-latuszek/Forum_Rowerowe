@@ -8,7 +8,6 @@
 
 <h1>Stwórz nowy post wątku "@threadTitle"</h1>
 
-<h4>Post</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,14 +23,14 @@
                 <input type="hidden" name="threadTitle" value="@threadTitle">
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Stwórz" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" asp-route-threadID="@threadID" asp-route-threadTitle="@threadTitle">Powrót do wątku "@threadTitle"</a>
+    <a asp-action="Index" asp-route-threadID="@threadID" asp-route-threadTitle="@threadTitle">Anuluj - powrót do wątku "@threadTitle"</a>
 </div>
 
 @section Scripts {

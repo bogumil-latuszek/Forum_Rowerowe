@@ -1,14 +1,13 @@
 ﻿@model ForumRowerowe.Models.Thread
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Usunięcie wątku";
 }
 
-<h1>Delete</h1>
+<h1>Usuń</h1>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Thread</h4>
+    <h4>Wątek</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -24,10 +23,10 @@
             @Html.DisplayFor(model => model.authorID)
         </dd>
     </dl>
-    
+    <h3>Potwierdzasz usunięcie?</h3>
     <form asp-action="Delete">
         <input type="hidden" asp-for="ThreadID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Tak - usuń" class="btn btn-danger" /> |
+        <a asp-action="Index">Nie - powrót do listy wątków</a>
     </form>
 </div>

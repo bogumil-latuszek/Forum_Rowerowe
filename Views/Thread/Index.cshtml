@@ -11,7 +11,7 @@
 <h1>Wątki</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Stwórz nowy</a>
 </p>
 <table class="table">
     <tbody>
@@ -33,8 +33,8 @@
                 @if (loggedInUser == item.authorID)
                 {
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.ThreadID">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ThreadID">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.ThreadID">Zmień</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ThreadID">Usuń</a>
                     </td>
                 }
             </tr>

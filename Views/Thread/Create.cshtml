@@ -1,12 +1,12 @@
 ﻿@model ForumRowerowe.Models.Thread
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Stwórz wątek";
 }
 
-<h1>Create</h1>
+<h1>Stwórz</h1>
 
-<h4>Thread</h4>
+<h4>Nowy wątek</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,14 +18,14 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Stwórz" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Anuluj - powrót do listy wątków</a>
 </div>
 
 @section Scripts {
