@@ -23,8 +23,9 @@ namespace ForumRowerowe.Controllers
         }*/
         public IActionResult Index(int threadID)
         {
-            var lp = repository.FindPosts(threadID);
-            return View(lp);
+            TempData["ThreadID"] = threadID;
+            var listp = repository.FindPosts(threadID);
+            return View(listp);
         }
         [Authorize]
         // GET: Post/Create
@@ -86,19 +87,20 @@ namespace ForumRowerowe.Controllers
             {
                 return View(post);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID });
         }
 
         // POST: Post/Edit/5
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit( [ Bind("PostID,Content")] Models.Post post)
+        public async Task<IActionResult> Edit( [ Bind("PostID,Content,ThreadID")] Models.Post post)
         {
+            post.authorID = User.Identity.Name;
             if (ModelState.IsValid)
             {
                 repository.UpdatePosts(post);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID });
         }
     }
 }
