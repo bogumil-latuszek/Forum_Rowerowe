@@ -4,11 +4,11 @@
 @model IEnumerable<ForumRowerowe.Models.Thread>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Wątki";
     string loggedInUser = @UserManager.GetUserName(User);
 }
 
-<h1>Index</h1>
+<h1>Wątki</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -22,7 +22,8 @@
                     @Html.DisplayFor(modelItem => item.ThreadID)
                 </td>
                 <td>
-                    <a  class="nav-link text-dark" asp-area="" asp-controller="Post" asp-action="Index" asp-route-threadID="@item.ThreadID">
+                    <a  class="nav-link text-dark" asp-area="" asp-controller="Post" 
+                       asp-action="Index" asp-route-threadID="@item.ThreadID" asp-route-threadTitle="@item.Title">
                         @Html.DisplayFor(modelItem => item.Title)
                     </a>
                 </td>

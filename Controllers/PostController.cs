@@ -16,23 +16,25 @@ namespace ForumRowerowe.Controllers
         {
             this.repository = repository;
         }        
-        public IActionResult Index(int threadID)
+        public IActionResult Index(int threadID, string threadTitle)
         {
             TempData["ThreadID"] = threadID;
+            TempData["ThreadTitle"] = threadTitle;
             var listp = repository.FindPosts(threadID);
             return View(listp);
         }
         [Authorize]
         // GET: Post/Create
-        public IActionResult Create(int threadID)
+        public IActionResult Create(int threadID, string threadTitle)
         {
             TempData["ThreadID"] = threadID;
+            TempData["ThreadTitle"] = threadTitle;
             return View();
         }
         // POST: Post/Create
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("PostID,Content,ThreadID")] Models.Post post)
+        public async Task<IActionResult> Create([Bind("PostID,Content,ThreadID")] Models.Post post, string threadTitle)
         {
             if (ModelState.IsValid)
             {
@@ -40,7 +42,7 @@ namespace ForumRowerowe.Controllers
                 post.authorID = currentUserName;
                 repository.AddPosts(post);
             }
-            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID });
+            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID, threadTitle = threadTitle });
         }
 
         // GET: Post/Delete

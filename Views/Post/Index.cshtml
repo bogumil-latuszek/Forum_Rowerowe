@@ -3,14 +3,15 @@
 @inject UserManager<IdentityUser> UserManager
 @model IEnumerable<ForumRowerowe.Models.Post> 
 @{
-    ViewData["Title"] = "Home Page";
     string loggedInUser = @UserManager.GetUserName(User);
     int threadID = (int)TempData["ThreadID"]; //use for Create
+    string threadTitle = (string)TempData["ThreadTitle"];
+    ViewData["Title"] = threadTitle;
 }
 
-<h1>Wszystkie Posty</h1>
+<h1>Posty wątku "@threadTitle"</h1>
 <p>
-    <a asp-action="Create" asp-route-threadID="@threadID">Create New</a>
+    <a asp-action="Create" asp-route-threadID="@threadID" asp-route-threadTitle="@threadTitle">Create New</a>
 </p>
 <table class="table">
     <tbody>
