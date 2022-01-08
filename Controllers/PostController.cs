@@ -78,28 +78,29 @@ namespace ForumRowerowe.Controllers
 
         // GET: Post/Edit/5
         [Authorize]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id, string threadTitle)
         {
             var post = repository.FindPost(id);
             var currentUserName = User.Identity.Name;
             if (post.authorID == currentUserName)
             {
+                TempData["ThreadTitle"] = threadTitle;
                 return View(post);
             }
-            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID });
+            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID, threadTitle = threadTitle });
         }
 
         // POST: Post/Edit/5
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit( [ Bind("PostID,Content,ThreadID")] Models.Post post)
+        public async Task<IActionResult> Edit( [ Bind("PostID,Content,ThreadID")] Models.Post post, string threadTitle)
         {
             post.authorID = User.Identity.Name;
             if (ModelState.IsValid)
             {
                 repository.UpdatePosts(post);
             }
-            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID });
+            return RedirectToAction(nameof(Index), new { threadID = post.ThreadID, threadTitle = threadTitle });
         }
     }
 }
