@@ -24,14 +24,15 @@ namespace ForumRowerowe.Controllers
         }
         [Authorize]
         // GET: Post/Create
-        public IActionResult Create()
+        public IActionResult Create(int threadID)
         {
+            TempData["ThreadID"] = threadID;
             return View();
-         }
+        }
         // POST: Post/Create
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("PostID,Content")] Models.Post post)
+        public async Task<IActionResult> Create([Bind("PostID,Content,ThreadID")] Models.Post post)
         {
             if (ModelState.IsValid)
             {
