@@ -15,12 +15,16 @@ namespace ForumRowerowe.Data
         }
         public void DeletePosts(int postID)
         {
-            _context.Posts.Remove(FindPost(postID));
-            _context.SaveChanges();
+            var postToDel = FindPost(postID);
+            if (postToDel != null)
+            {
+                _context.Posts.Remove(postToDel);
+                _context.SaveChanges();
+            }
         }
         public Post FindPost(int id)
         {
-            var post = (from x in _context.Posts where x.PostID == id select x).First();
+            var post = (from x in _context.Posts where x.PostID == id select x).FirstOrDefault();  // may return null
             return post;
         }
         public void AddPosts(Post post)
