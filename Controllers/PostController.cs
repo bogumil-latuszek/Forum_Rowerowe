@@ -1,6 +1,7 @@
 ﻿using ForumRowerowe.Data;
 using ForumRowerowe.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -34,8 +35,13 @@ namespace ForumRowerowe.Controllers
         // POST: Post/Create
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("PostID,Content,ThreadID")] Models.Post post, string threadTitle)
+        public async Task<IActionResult> Create([Bind("PostID,Content,ThreadID")] Models.Post post, string threadTitle, IFormFile picture)
         {
+            if (picture is null)
+            {
+                throw new ArgumentNullException(nameof(picture));
+            }
+
             if (ModelState.IsValid)
             {
                 var currentUserName = User.Identity.Name;
