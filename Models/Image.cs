@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace ForumRowerowe.Models
 {
     public class Image
     {
+        [HiddenInput]
+        public int ImageID { get; set; }
+
+        public string ImagePath { get; set; }
+
     }
 }
