@@ -17,5 +17,8 @@ namespace ForumRowerowe.Models
         [HiddenInput]
         public int ThreadID { get; set; }
         public Thread Thread { get; set; } //navigation property
+
+        [HiddenInput]
+        public int ImgID { get; set; }
     }
 }
