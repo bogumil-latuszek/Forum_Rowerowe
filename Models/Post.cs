@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ForumRowerowe.Models
 {
@@ -19,6 +20,7 @@ namespace ForumRowerowe.Models
         public Thread Thread { get; set; } //navigation property
 
         [HiddenInput]
-        public int ImageID { get; set; }
+        [ForeignKey("Image")]
+        public int? ImageID { get; set; }
     }
 }

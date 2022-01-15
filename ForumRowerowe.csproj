@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20220115184128_Add_Image_Model.cs" />
+    <Compile Remove="Data\Migrations\20220115184128_Add_Image_Model.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220115184856_Add_Image_Model.cs" />
+    <Compile Remove="Data\Migrations\20220115184856_Add_Image_Model.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220115185334_Add_Image_Model.cs" />
+    <Compile Remove="Data\Migrations\20220115185334_Add_Image_Model.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.21" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.21" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.21" />
