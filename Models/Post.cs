@@ -20,7 +20,8 @@ namespace ForumRowerowe.Models
         public Thread Thread { get; set; } //navigation property
 
         [HiddenInput]
-        [ForeignKey("Image")]
+        [ForeignKey("ImageID")]
         public int? ImageID { get; set; }
+        public Image Image { get; set; }
     }
 }

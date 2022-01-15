@@ -12,6 +12,8 @@
     <Compile Remove="Data\Migrations\20220115184856_Add_Image_Model.Designer.cs" />
     <Compile Remove="Data\Migrations\20220115185334_Add_Image_Model.cs" />
     <Compile Remove="Data\Migrations\20220115185334_Add_Image_Model.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220115190624_Add_Image_foreign_key.cs" />
+    <Compile Remove="Data\Migrations\20220115190624_Add_Image_foreign_key.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
