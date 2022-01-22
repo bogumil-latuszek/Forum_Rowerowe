@@ -8,6 +8,11 @@ namespace ForumRowerowe.Data
 {
     public interface IForumCrudRepository
     {
+        //this may be later moved to its own repository
+        void AddImage(Image image, Post post);
+        Image FindImage(int imageID);
+        void DeleteImage(int imageID);
+        //*********************************************
         void DeletePosts(int postID);
         void AddPosts(Post post);
         Post FindPost(int postID);

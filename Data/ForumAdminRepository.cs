@@ -49,5 +49,38 @@ namespace ForumRowerowe.Data
         {
             return (from p in _context.Posts select p).Where(p => p.Thread.ThreadID == threadID).OrderBy(p => p.PostID).ToList();
         }
+
+        //this may be later moved to its own repository
+        public void AddImage(Image image, Post post)
+        {
+            _context.Images.Add(image);
+            _context.SaveChanges();
+            int imageNewID = image.ImageID;
+            post.ImageID = imageNewID;
+            UpdatePosts(post);
+        }
+
+        public Image FindImage(int imageID)
+        {
+            var image = (from x in _context.Images where x.ImageID == imageID select x).FirstOrDefault();  // may return null
+            return image;
+        }
+
+        public void DeleteImage(int imageID)
+        {
+            var imageToDel = FindImage(imageID);
+            if (imageToDel != null)
+            {
+                _context.Images.Remove(imageToDel);
+                _context.SaveChanges();
+            }
+            List<Post> posts = (from p in _context.Posts select p).Where(p => p.ImageID == imageID).OrderBy(p => p.PostID).ToList();
+            foreach(Post p in posts)
+            {
+                p.ImageID = null;
+                UpdatePosts(p);
+            }
+        }
+        //***********************************************
     }
 }
