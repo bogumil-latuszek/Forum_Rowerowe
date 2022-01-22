@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,18 +38,42 @@ namespace ForumRowerowe.Controllers
         [Authorize]
         public async Task<IActionResult> Create([Bind("PostID,Content,ThreadID")] Models.Post post, string threadTitle, IFormFile picture)
         {
-            if (picture is null)
-            {
-                throw new ArgumentNullException(nameof(picture));
-            }
-
+            var currentUserName = User.Identity.Name;
             if (ModelState.IsValid)
             {
-                var currentUserName = User.Identity.Name;
                 post.authorID = currentUserName;
                 repository.AddPosts(post);
             }
+
+            if (picture != null)
+            {
+                AddPicture(currentUserName, picture, post);
+            }
+
             return RedirectToAction(nameof(Index), new { threadID = post.ThreadID, threadTitle = threadTitle });
+        }
+
+        private void AddPicture(string currentUserName, IFormFile picture, Post post)
+        {
+            string cwd = Directory.GetCurrentDirectory();
+            string path = cwd + "\\Images\\" + currentUserName;
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            string fileName = picture.FileName;
+            path = Path.Combine(path, fileName);
+            using (FileStream fs = System.IO.File.Create(path))
+            {
+                picture.CopyTo(fs);
+                Image image = new Image();
+                image.ImagePath = path;
+                repository.AddImage(image, post);
+
+            }
+
+            return;
+
         }
 
         // GET: Post/Delete
