@@ -185,7 +185,7 @@ namespace ForumRowerowe.Controllers
         }
 
         [Route("/api/posts/{id}")]
-        public Post GetPosts(int id)
+        public Post GetPost(int id)
         {
             return repository.FindPost(id);
         }

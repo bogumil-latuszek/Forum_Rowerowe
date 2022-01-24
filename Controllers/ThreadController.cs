@@ -155,5 +155,16 @@ namespace ForumRowerowe.Controllers
 
             return View(thread);
         }*/
+        [Route("/api/threads/")]
+        public List<Thread> GetThreads()
+        {
+            return repository.FindAll().ToList();
+        }
+
+        [Route("/api/threads/{id}")]
+        public Thread GetThread(int id)
+        {
+            return repository.FindThread(id);
+        }
     }
 }
