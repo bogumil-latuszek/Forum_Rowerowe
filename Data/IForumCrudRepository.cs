@@ -10,7 +10,9 @@ namespace ForumRowerowe.Data
     {
         //this may be later moved to its own repository
         void AddImage(Image image, Post post);
-        Image FindImage(int imageID);
+        #nullable enable
+        Image? FindImage(int imageID);
+        #nullable disable
         void DeleteImage(int imageID);
         //*********************************************
         void DeletePosts(int postID);

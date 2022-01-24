@@ -1,12 +1,22 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-@model IEnumerable<ForumRowerowe.Models.Post> 
+@model IEnumerable<ForumRowerowe.Controllers.PostWithImg> 
 @{
     string loggedInUser = @UserManager.GetUserName(User);
     int threadID = (int)TempData["ThreadID"]; //use for Create
     string threadTitle = (string)TempData["ThreadTitle"];
     ViewData["Title"] = threadTitle;
+}
+@functions{
+    public string NameAuthor(Post post)
+    {
+        if (post.authorID == null)
+        {
+            return "anonymous";
+        }
+        else return post.authorID;
+    }
 }
 
 <h1>Posty wątku "@threadTitle"</h1>
@@ -17,19 +27,28 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @item.PostID > @item.Content
-                </td>
-                @if(loggedInUser == item.authorID)
+        <tr>
+            <td>
+                @NameAuthor(item.Post)
+            </td>
+            <td>
+                @if (item.Post.ImageID != null)
                 {
-                    <td>
-                    <a asp-action="Edit" asp-route-id="@item.PostID" asp-route-threadTitle="@threadTitle">Zmień</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PostID" asp-route-threadTitle="@threadTitle">Usuń</a>
-                    </td>
+                    <img height="100" width="100"
+                    src="@item.ImagePath" alt="" />
                 }
-                
-            </tr>
+
+                @item.Post.Content
+            </td>
+            @if (loggedInUser == item.Post.authorID)
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Post.PostID" asp-route-threadTitle="@threadTitle">Zmień</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Post.PostID" asp-route-threadTitle="@threadTitle">Usuń</a>
+                </td>
+            }
+
+        </tr>
         }
     </tbody>
 </table>

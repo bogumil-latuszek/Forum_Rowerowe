@@ -59,13 +59,14 @@ namespace ForumRowerowe.Data
             post.ImageID = imageNewID;
             UpdatePosts(post);
         }
-
-        public Image FindImage(int imageID)
+        #nullable enable
+        public Image? FindImage(int imageID)
         {
-            var image = (from x in _context.Images where x.ImageID == imageID select x).FirstOrDefault();  // may return null
-            return image;
+            var images = (from x in _context.Images where x.ImageID == imageID select x);
+            var image = images.FirstOrDefault(); // may return null
+            return image; 
         }
-
+        #nullable disable
         public void DeleteImage(int imageID)
         {
             var imageToDel = FindImage(imageID);

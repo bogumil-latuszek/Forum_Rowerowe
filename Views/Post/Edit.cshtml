@@ -2,6 +2,7 @@
 
 @{
     string threadTitle = (string)TempData["ThreadTitle"];
+    int? ImageID = (int?)TempData["ImageID"];
     ViewData["Title"] = threadTitle;
 }
 
@@ -11,7 +12,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <input asp-for="PostID" class="form-control" />
@@ -25,6 +26,17 @@
             <div class="form-group">
                 <input asp-for="ThreadID" class="form-control" />
                 <input type="hidden" name="threadTitle" value="@threadTitle">
+            </div>
+            <div class="form-group">
+                <input asp-for="ImageID" class="form-control" />
+                <input type="hidden" name="threadTitle" value="@ImageID">
+            </div>
+            <div>
+                <input type="file" name="picture" class="form-control" />
+            </div>
+            <div>
+                Usuń Zdjęcie
+                <input type="checkbox" name="deletePicture" class="form-control" @Html.CheckBox("deletePicture", new { @class = "chkBox" })>
             </div>
             <div class="form-group">
                 <input type="submit" value="Zapisz" class="btn btn-primary" />

@@ -11,6 +11,20 @@ using System.Threading.Tasks;
 
 namespace ForumRowerowe.Controllers
 {
+    public class PostWithImg
+    {
+        public Post Post;
+        #nullable enable
+        public string? ImagePath;
+        public PostWithImg(Post post, string? imagePath)
+        {
+            Post = post;
+            ImagePath = imagePath;
+        }
+        #nullable disable
+    }
+
+    
     public class PostController : Controller
     {
         private IForumCrudRepository repository;
@@ -23,7 +37,26 @@ namespace ForumRowerowe.Controllers
             TempData["ThreadID"] = threadID;
             TempData["ThreadTitle"] = threadTitle;
             var listp = repository.FindPosts(threadID);
-            return View(listp);
+            //this should be in a separate method in its own repository
+            //var list = new List<Tuple<Post, string? >>();
+            var listPI = new List<PostWithImg>();
+            foreach (Post post in listp)
+            {
+                string? imgPath = null;
+                if (post.ImageID != null)
+                {
+                    #nullable enable
+                    Image? img = repository.FindImage((int)post.ImageID);
+                    if(img != null)
+                    {
+                        imgPath = img.ImagePath;
+                    }    
+                    #nullable disable
+                }
+                listPI.Add(new PostWithImg(post, imgPath));
+            }
+            //*************************************
+            return View(listPI);
         }
         [Authorize]
         // GET: Post/Create
@@ -56,7 +89,7 @@ namespace ForumRowerowe.Controllers
         private void AddPicture(string currentUserName, IFormFile picture, Post post)
         {
             string cwd = Directory.GetCurrentDirectory();
-            string path = cwd + "\\Images\\" + currentUserName;
+            string path = cwd + "\\wwwroot\\Images\\" + currentUserName;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -67,7 +100,8 @@ namespace ForumRowerowe.Controllers
             {
                 picture.CopyTo(fs);
                 Image image = new Image();
-                image.ImagePath = path;
+                string html_path = "/Images/" + currentUserName + "/" + fileName;
+                image.ImagePath = html_path;
                 repository.AddImage(image, post);
 
             }
@@ -118,6 +152,7 @@ namespace ForumRowerowe.Controllers
             if (post.authorID == currentUserName)
             {
                 TempData["ThreadTitle"] = threadTitle;
+                TempData["ImageID"] = post.ImageID;
                 return View(post);
             }
             return RedirectToAction(nameof(Index), new { threadID = post.ThreadID, threadTitle = threadTitle });
@@ -126,14 +161,23 @@ namespace ForumRowerowe.Controllers
         // POST: Post/Edit/5
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit( [ Bind("PostID,Content,ThreadID")] Models.Post post, string threadTitle)
+        public async Task<IActionResult> Edit( [ Bind("PostID,Content,ThreadID,ImageID")] Models.Post post, string threadTitle, IFormFile picture, bool deletePicture)
         {
             post.authorID = User.Identity.Name;
             if (ModelState.IsValid)
             {
+                if(picture != null)
+                {
+                    AddPicture(post.authorID, picture, post);
+                }
+                if (deletePicture == true)
+                {
+                    post.ImageID = null;
+                }
                 repository.UpdatePosts(post);
             }
             return RedirectToAction(nameof(Index), new { threadID = post.ThreadID, threadTitle = threadTitle });
         }
+
     }
 }
