@@ -12,12 +12,13 @@ namespace ForumRowerowe.Data
         void AddImage(Image image, Post post);
         #nullable enable
         Image? FindImage(int imageID);
-        #nullable disable
+        
         void DeleteImage(int imageID);
         //*********************************************
         void DeletePosts(int postID);
         void AddPosts(Post post);
-        Post FindPost(int postID);
+        Post? FindPost(int postID);
+        #nullable disable
         void UpdatePosts(Post post);
         IList<Post> FindAll();
         IList<Post> FindPage(int page, int size);

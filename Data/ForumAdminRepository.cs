@@ -22,7 +22,8 @@ namespace ForumRowerowe.Data
                 _context.SaveChanges();
             }
         }
-        public Post FindPost(int id)
+        #nullable enable
+        public Post? FindPost(int id)
         {
             var post = (from x in _context.Posts where x.PostID == id select x).FirstOrDefault();  // may return null
             return post;
@@ -59,7 +60,7 @@ namespace ForumRowerowe.Data
             post.ImageID = imageNewID;
             UpdatePosts(post);
         }
-        #nullable enable
+        
         public Image? FindImage(int imageID)
         {
             var images = (from x in _context.Images where x.ImageID == imageID select x);

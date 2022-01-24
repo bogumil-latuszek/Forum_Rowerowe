@@ -185,11 +185,12 @@ namespace ForumRowerowe.Controllers
         }
 
         [Route("/api/posts/{id}")]
-        public Post GetPost(int id)
+        #nullable enable
+        public Post? GetPost(int id)
         {
             return repository.FindPost(id);
         }
-
+        #nullable disable
         [HttpPost]
         [Route("/api/posts/")]
         public ActionResult CreatePost([FromBody] Post post)
@@ -205,5 +206,37 @@ namespace ForumRowerowe.Controllers
                 return new BadRequestResult();
             }
         }
+        [HttpPut]
+        [Route("/api/edit_post/{id}")]
+        public ActionResult EditPost([FromBody] Post post, int id)
+        {
+            if (post != null && post.PostID != null)
+            {
+                repository.UpdatePosts(post);
+                int newID = post.PostID;
+                return new CreatedResult($"/api/posts/{newID}", post);
+            }
+            else
+            {
+                return new BadRequestResult();
+            }
+        }
+        [HttpDelete]
+        [Route("/api/delete_post/{id}")]
+        #nullable enable
+        public ActionResult DeletePost( int id)
+        {
+            Post? post = repository.FindPost(id);
+            if (post != null )
+            {
+                repository.DeletePosts(id);
+                return new OkObjectResult(post);
+            }
+            else
+            {
+                return new BadRequestResult();
+            }
+        }
+        #nullable disable
     }
 }
