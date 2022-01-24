@@ -178,6 +178,16 @@ namespace ForumRowerowe.Controllers
             }
             return RedirectToAction(nameof(Index), new { threadID = post.ThreadID, threadTitle = threadTitle });
         }
+        [Route("/api/posts/")]
+        public List<Post> GetPosts()
+        {
+            return repository.FindAll().ToList();
+        }
 
+        [Route("/api/posts/{id}")]
+        public Post GetPosts(int id)
+        {
+            return repository.FindPost(id);
+        }
     }
 }
