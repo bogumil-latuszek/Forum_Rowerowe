@@ -189,5 +189,21 @@ namespace ForumRowerowe.Controllers
         {
             return repository.FindPost(id);
         }
+
+        [HttpPost]
+        [Route("/api/posts/")]
+        public ActionResult CreatePost([FromBody] Post post)
+        {
+            if (post != null)
+            {
+                repository.AddPosts(post);
+                int newID = post.PostID;
+                return new CreatedResult($"/api/posts/{newID}", post);
+            }
+            else
+            {
+                return new BadRequestResult();
+            }
+        }
     }
 }
