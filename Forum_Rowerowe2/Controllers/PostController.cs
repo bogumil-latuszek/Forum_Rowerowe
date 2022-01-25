@@ -186,9 +186,14 @@ namespace ForumRowerowe.Controllers
 
         [Route("/api/posts/{id}")]
         #nullable enable
-        public Post? GetPost(int id)
+        public ActionResult<Post> GetPost(int id)
         {
-            return repository.FindPost(id);
+            Post? post = repository.FindPost(id);
+            if (post == null)
+            {
+                return new NotFoundResult();
+            }
+            return Ok(post);
         }
         #nullable disable
         [HttpPost]
