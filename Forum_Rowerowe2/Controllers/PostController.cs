@@ -215,11 +215,20 @@ namespace ForumRowerowe.Controllers
         [Route("/api/edit_post/{id}")]
         public ActionResult EditPost([FromBody] Post post, int id)
         {
-            if (post != null && post.PostID != null)
+            if (post != null)
             {
-                repository.UpdatePosts(post);
-                int newID = post.PostID;
-                return new CreatedResult($"/api/posts/{newID}", post);
+                if(repository.FindPost(id) != null)
+                {
+                    post.PostID = id;
+                    repository.UpdatePosts(post);
+                    int newID = post.PostID;
+                    return new CreatedResult($"/api/posts/{newID}", post);
+                }
+                else
+                {
+                    return new NotFoundResult();
+                }
+                
             }
             else
             {

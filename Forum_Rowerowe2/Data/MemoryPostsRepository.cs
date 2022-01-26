@@ -78,8 +78,8 @@ namespace ForumRowerowe.Data
 
         public void UpdatePosts(Post post)
         {
-            var postToDel = FindPost(post.PostID);
-            if (postToDel != null)
+            var postToUpdate = FindPost(post.PostID);
+            if (postToUpdate != null)
             {
                 posts[post.PostID] = post;
             }
