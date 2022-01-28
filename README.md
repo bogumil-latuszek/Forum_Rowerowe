@@ -10,6 +10,8 @@
 
 2 skonfiguruj bazę danych : w appsettings.json należy zmienić "DefaultConnection";
 
+3 w visual studio menu test można uruchomić testy API
+
 ## używanie
 
 1.Po uruchomieniu projektu ukarze się strona główna
