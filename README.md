@@ -6,20 +6,20 @@
 
 ## uruchomienie
 
-1.wejdź do katalogu Forum_Rowerowe2 i uruchom ForumRowerowe.sln w visual studio
+1. wejdź do katalogu Forum_Rowerowe2 i uruchom ForumRowerowe.sln w visual studio
 
-2 skonfiguruj bazę danych : w appsettings.json należy zmienić "DefaultConnection";
+2. skonfiguruj bazę danych: appsettings.json może wymagać zmiany "DefaultConnection";
 
-3 w visual studio menu test można uruchomić testy API
+3. w visual studio menu test można uruchomić testy API
 
 ## używanie
 
-1.Po uruchomieniu projektu ukarze się strona główna
+1. Po uruchomieniu projektu ukarze się strona główna
 
-2.Aby wyświetlić otwarte wątki tematyczne należy wejść w pasku nawigacyjnym w Wątki;
+2. Aby wyświetlić otwarte wątki tematyczne należy wejść w pasku nawigacyjnym w Wątki;
 
-3.niezalogowani urzytkownicy mogą jedynie przeglądać wątki i zawarte w nich posty.
+3. Niezalogowani urzytkownicy mogą jedynie przeglądać wątki i zawarte w nich posty.
 
-4.Aby się zalogować w prawym górnym rogu należy wybrać "Login" lub w przypadku niezarejestrowanego urzytkownika "Register";
+4. Aby się zalogować w prawym górnym rogu należy wybrać "Login" lub w przypadku niezarejestrowanego urzytkownika "Register";
 
-5.Po zalogowaniu urzytkownik uzyskuje więcej możliwości, może otwierać nowe wątki, dodawać nowe posty w otwartych wątkach a także ma dostęp do ich edycji/usuwania.
+5. Po zalogowaniu urzytkownik uzyskuje więcej możliwości, może otwierać nowe wątki, dodawać nowe posty w otwartych wątkach a także ma dostęp do ich edycji/usuwania.
